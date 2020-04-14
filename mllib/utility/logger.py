@@ -8,6 +8,18 @@ STOP_LOG = 100
 
 def make_root_logger(console_loglevel: int = logging.DEBUG, file_loglevel: int = STOP_LOG,
                      slack_loglevel: int = STOP_LOG, log_file_path: str = None) -> logging.Logger:
+    """Generate the root logger, including Slack log handler.
+
+    Args:
+        console_loglevel: the logging level of console handler.
+        file_loglevel: the logging level of file log handler.
+        slack_loglevel: the logging level of slack log handler.
+        log_file_path: the path of log file.
+
+    Returns:
+        the root logger
+
+    """
     root_logger = logging.getLogger()
     root_logger.setLevel(logging.DEBUG)
 
@@ -47,6 +59,15 @@ def make_root_logger(console_loglevel: int = logging.DEBUG, file_loglevel: int =
 
 
 def make_child_logger(logger_name: str) -> logging.Logger:
+    """Generate a logger, which propagates its logs to the root logger.
+
+    Args:
+        logger_name: the name of this logger. "__name__" is recommended.
+
+    Returns:
+        logging.Logger
+
+    """
     logger = logging.getLogger(logger_name)
     logger.addHandler(logging.NullHandler())
     logger.setLevel(logging.DEBUG)
