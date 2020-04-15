@@ -45,8 +45,10 @@ def make_root_logger(console_loglevel: int = logging.DEBUG, file_loglevel: int =
             webhook_url = os.environ[env_val_name]
         except KeyError as e:
             root_logger.error(
-                "Environment variable \"{0}\" is not defined, so root logger cannot log to Slack." +
-                "Do \"export {0}=(WebHook URL)\" in the terminal or" +
+                "Environment variable \"{0}\" is not defined, so root logger cannot log to Slack.".format(
+                    env_val_name) +
+                "Do \"export {0}=(WebHook URL)\" in the terminal or".format(
+                    env_val_name) +
                 "edit environment variables in Edit Configurations, PyCharm".format(
                     env_val_name))
         else:
