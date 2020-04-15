@@ -40,11 +40,13 @@ class XGBoostModel(Model[xgb.Booster]):
 
         try:
             self.num_boost_round = self.parameters["num_boost_round"]
+            self.parameters.pop("num_boost_round")
         except KeyError:
             self.logger.warning("parameters[\"num_boost_round\"] not found. 10 will be used as its default value.")
 
         try:
             self.early_stopping_rounds = self.parameters["early_stopping_rounds"]
+            self.parameters.pop("early_stopping_rounds")
         except KeyError:
             self.logger.warning("parameters[\"early_stopping_rounds\"] not found. None will be used as its default "
                                 "value.")
